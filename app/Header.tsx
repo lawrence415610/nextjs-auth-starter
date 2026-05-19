@@ -10,14 +10,14 @@ export default function Header() {
     <header className="w-full bg-white shadow-md py-4 px-8">
       <nav className="flex justify-between items-center">
         <Link href="/" className="text-xl font-bold text-gray-800 hover:text-blue-600 transition-colors">
-          Superblog
+          Nightlife Syd
         </Link>
         <div className="flex items-center space-x-4">
           <Link 
-            href="/posts" 
+            href="/" 
             className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition"
           >
-            Posts
+            Map
           </Link>
           {session ? (
             <>

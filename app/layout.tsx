@@ -1,11 +1,12 @@
 // app/layout.tsx
 import "./globals.css";
+import "mapbox-gl/dist/mapbox-gl.css";
 import Header from "./Header";
 import Providers from "./providers";
 
 export const metadata = {
-  title: "Superblog",
-  description: "A blog app using Next.js and Prisma",
+  title: "Nightlife Syd",
+  description: "A map-first nightlife MVP for Sydney",
 };
 
 export default function RootLayout({
