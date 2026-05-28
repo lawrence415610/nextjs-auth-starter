@@ -13,33 +13,25 @@ export default function Header() {
           Nightlife Syd
         </Link>
         <div className="flex items-center space-x-4">
-          <Link 
-            href="/" 
+          <Link
+            href="/"
             className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition"
           >
             Map
           </Link>
           {session ? (
-            <>
-              <Link 
-                href="/posts/new" 
-                className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition"
-              >
-                New Post
-              </Link>
-              <div className="flex items-center space-x-4">
-                <div className="text-sm text-gray-500">
-                  {session.user?.name && <div>{session.user.name}</div>}
-                  <div>{session.user?.email}</div>
-                </div>
-                <button
-                  onClick={() => signOut()}
-                  className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition"
-                >
-                  Sign Out
-                </button>
+            <div className="flex items-center space-x-4">
+              <div className="text-sm text-gray-500">
+                {session.user?.name && <div>{session.user.name}</div>}
+                <div>{session.user?.email}</div>
               </div>
-            </>
+              <button
+                onClick={() => signOut()}
+                className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition"
+              >
+                Sign Out
+              </button>
+            </div>
           ) : (
             <Link href="/login" className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition">
               Sign In

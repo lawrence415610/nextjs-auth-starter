@@ -14,20 +14,75 @@ datasource db {
 }
 
 model User {
-  id       String  @id @default(cuid())
-  name     String?
-  email    String  @unique
-  password String
-  posts    Post[]
+  id           String       @id @default(cuid())
+  name         String?
+  email        String       @unique
+  password     String
+  topics       Topic[]
+  topicPosts   TopicPost[]
+  topicReplies TopicReply[]
+  topicVotes   TopicVote[]
 }
 
-model Post {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+model Topic {
+  id        String      @id @default(cuid())
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
   title     String
-  content   String?
-  published Boolean  @default(false)
+  summary   String
+  address   String
+  latitude  Float
+  longitude Float
   authorId  String?
-  author    User?    @relation(fields: [authorId], references: [id])
+  anonymousKey String?
+  author    User?       @relation(fields: [authorId], references: [id], onDelete: SetNull)
+  posts     TopicPost[]
+
+  @@index([createdAt])
+  @@index([latitude, longitude])
+}
+
+model TopicPost {
+  id        String       @id @default(cuid())
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+  content   String
+  topicId   String
+  topic     Topic        @relation(fields: [topicId], references: [id], onDelete: Cascade)
+  authorId  String?
+  anonymousKey String?
+  author    User?        @relation(fields: [authorId], references: [id], onDelete: SetNull)
+  replies   TopicReply[]
+  votes     TopicVote[]
+
+  @@index([topicId, createdAt])
+}
+
+model TopicReply {
+  id        String    @id @default(cuid())
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  content   String
+  postId    String
+  post      TopicPost @relation(fields: [postId], references: [id], onDelete: Cascade)
+  authorId  String?
+  anonymousKey String?
+  author    User?     @relation(fields: [authorId], references: [id], onDelete: SetNull)
+
+  @@index([postId, createdAt])
+}
+
+model TopicVote {
+  id        String    @id @default(cuid())
+  createdAt DateTime  @default(now())
+  value     Int
+  postId    String
+  post      TopicPost @relation(fields: [postId], references: [id], onDelete: Cascade)
+  authorId  String?
+  anonymousKey String?
+  author    User?     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  @@unique([postId, authorId])
+  @@unique([postId, anonymousKey])
+  @@index([postId])
 }

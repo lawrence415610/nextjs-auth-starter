@@ -59,3 +59,49 @@ body {
   font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
   font-size: 12px;
 }
+
+.nightlife-pin {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border: 3px solid #ffffff;
+  border-radius: 999px 999px 999px 0;
+  box-shadow: 0 14px 24px rgb(0 0 0 / 0.36);
+  cursor: pointer;
+  transform: rotate(-45deg);
+}
+
+.nightlife-pin::after {
+  position: absolute;
+  right: -5px;
+  bottom: -5px;
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  background: rgb(0 0 0 / 0.22);
+  content: "";
+  filter: blur(3px);
+}
+
+.nightlife-pin-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: #ffffff;
+  transform: rotate(45deg);
+}
+
+.nightlife-pin-mine,
+.nightlife-pin-temporary {
+  background: #dc2626;
+}
+
+.nightlife-pin-nearby {
+  background: #f97316;
+}
+
+.nightlife-pin-user {
+  background: #2563eb;
+}
